@@ -32,6 +32,7 @@ def update_book(db: Session, book_id: int, book_in: BookCreate):
     book = get_book(db, book_id) 
     if not book: 
         return None 
+
     book.title = book_in.title
     book.author = book_in.author 
     book.year_published = book_in.year_published 

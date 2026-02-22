@@ -1,15 +1,18 @@
-# app/api/reviews.py
-from fastapi import APIRouter 
-router = APIRouter(
-    prefix="/reviews",
-    tags=["reviews"], 
-    )
+# app/api/reviews.py 
+from fastapi import APIRouter, Depends 
+from sqlalchemy.orm import Session 
+from typing import List 
+from app.db.session import get_db 
+from app.schemas.review import Review, ReviewCreate 
+from app.crud import review as crud_review 
 
-@router.get("/book/{book_id}", summary="List reviews for a book (placeholder)") 
-async def list_reviews_for_book(book_id: int): 
-    """Temporary hard-coded reviews. Will be replaced with DB-backed implementation later.""" 
-    return [ 
-            {"book_id": book_id, "review_id": 1, "rating": 5, "comment": "Excellent!"}, 
-            {"book_id": book_id, "review_id": 2, "rating": 4, "comment": "Very good."}, 
-            ]
- 
+router = APIRouter( prefix="/reviews", tags=["reviews"], ) 
+
+@router.get("/book/{book_id}", response_model=List[Review], summary="List reviews for a book") 
+async def list_reviews_for_book(book_id: int, db: Session = Depends(get_db)): 
+    return crud_review.get_reviews(db, book_id)
+
+
+@router.post("/", response_model=Review, status_code=201, summary="Create a review") 
+async def create_review(review_in: ReviewCreate, db: Session = Depends(get_db)): 
+    return crud_review.create_review(db, review_in)

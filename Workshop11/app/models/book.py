@@ -1,5 +1,6 @@
 #app/models/book.py
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import Mapped
 from app.db.base import Base
 
 class Book(Base):
