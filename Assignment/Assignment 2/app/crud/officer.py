@@ -2,6 +2,7 @@
 from sqlalchemy.orm import Session
 from app.models.officer import Officer
 
+
 def get_officers(db: Session):
     return db.query(Officer).all()
 
@@ -29,3 +30,14 @@ def delete_officer(db: Session, officer_id: int):
         db.delete(officer)
         db.commit()
     return officer
+
+
+def validate_officer_login(db: Session, OfficerID: int, PersonID: int):
+    return (
+        db.query(Officer)
+        .filter(
+            Officer.OfficerID == OfficerID,
+            Officer.PersonID == PersonID
+        )
+        .first()
+    )

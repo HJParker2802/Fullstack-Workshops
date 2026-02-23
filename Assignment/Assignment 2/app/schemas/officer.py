@@ -2,8 +2,14 @@
 from pydantic import BaseModel
 from typing import Optional
 
+
+class OfficerLogin(BaseModel):
+    OfficerID: int
+    PersonID: int
+
+
 class OfficerBase(BaseModel):
-    personID: int
+    PersonID: int
     ViolationsRecorded: Optional[int] = 0
 
 class OfficerCreate(OfficerBase):

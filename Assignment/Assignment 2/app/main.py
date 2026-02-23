@@ -11,7 +11,7 @@ app = FastAPI(
 
 @app.get("/", )
 def root_message():
-    return "Traffic Violations API\nVisit /docs to see the API documentation\n This was written by Harry Parker \n for Fullstack Development Assignment 2."
+    return "Traffic Violations API   Visit /docs to see the API documentation           This was written by Harry Parker for Fullstack Development Assignment 2."
 
 app.include_router(person.router)
 app.include_router(drivers_license.router)

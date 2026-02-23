@@ -2,10 +2,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-
 from app.crud import officer as crud
 from app.core.deps import get_db
 from app.schemas.officer import OfficerOut, OfficerCreate, OfficerUpdate
+from app.schemas.officer import OfficerLogin
+from app.crud.officer import validate_officer_login
+from app.core.security import create_access_token
+
 
 
 router = APIRouter(prefix="/officers", tags=["Officers"])
@@ -44,3 +47,23 @@ def delete_officer(officer_id: int, db: Session = Depends(get_db)):
     if not db_officer:
         raise HTTPException(status_code=404, detail="Officer not found")
     return db_officer
+
+
+
+@router.post("/login")
+def login(data: OfficerLogin, db: Session = Depends(get_db)):
+
+    officer = validate_officer_login(db, data.OfficerID, data.PersonID)
+
+    if not officer:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid OfficerID or PersonID"
+        )
+
+    token = create_access_token(subject=str(officer.OfficerID))
+
+    return {
+        "access_token": token,
+        "token_type": "bearer"
+    }

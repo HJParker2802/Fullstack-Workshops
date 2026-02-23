@@ -31,3 +31,6 @@ def delete_person(db: Session, person_id: int):
     db.delete(person)
     db.commit()
     return person
+
+def get_person_by_email(db: Session, email: str):
+    return db.query(PersonModel).filter(PersonModel.email == email).first()
