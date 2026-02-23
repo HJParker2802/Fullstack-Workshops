@@ -1,7 +1,7 @@
 #app/api/violation_types.py
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.db.session import get_db
+from app.core.deps import get_db
 
 router = APIRouter(prefix="/violation-types", tags=["Violation Types"])
 

@@ -16,9 +16,10 @@ class Person(Base):
     ZipCode = Column(String(5))
     City = Column(String(50))
     DOB = Column(String(10))
-    Height = Column(String(5))      # MUST be String
-    Weight = Column(String(5))      # MUST be String
+    Height = Column(Integer)
+    Weight = Column(Integer)
     EyeColour = Column(String(6))
     PhoneNum = Column(String(12))
 
+    # use string reference to avoid circular imports
     license = relationship("DriversLicense", back_populates="persons")

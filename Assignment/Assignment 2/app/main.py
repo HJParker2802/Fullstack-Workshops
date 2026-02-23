@@ -7,7 +7,6 @@ from app.api import vehicles
 from app.api import violations
 from app.api import violation_types
 from app.api import drivers_license
-from app.api import vehicle_make
 
 app = FastAPI(
     title="Traffic Violations API",
@@ -21,4 +20,3 @@ app.include_router(vehicles.router)
 app.include_router(violations.router)
 app.include_router(violation_types.router)
 app.include_router(drivers_license.router)
-app.include_router(vehicle_make.router)
