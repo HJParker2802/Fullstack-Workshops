@@ -7,7 +7,7 @@ class DriversLicense(Base):
     __tablename__ = "tbl_DriversLicense"
 
     DriversLicenseID = Column(Integer, primary_key=True, index=True)
-    LicenseNum = Column(String(20))
+    DriversLicenseOrigin = Column(String(20))
 
     # string reference to Person
     persons = relationship("Person", back_populates="license")

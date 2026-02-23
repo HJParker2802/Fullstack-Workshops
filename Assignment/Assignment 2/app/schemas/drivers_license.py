@@ -1,12 +1,15 @@
 #app/schemas/drivers_license.py
 from pydantic import BaseModel
 
+from pydantic import BaseModel
+
 class DriversLicenseBase(BaseModel):
-    Origin: str
+    DriversLicenseOrigin: str
 
-class DriversLicenseCreate(DriversLicenseBase):
-    pass
-
+class DriversLicenseCreate(BaseModel):
+    DriversLicenseID: int
+    DriversLicenseOrigin: str
+    
 class DriversLicense(DriversLicenseBase):
     DriversLicenseID: int
 

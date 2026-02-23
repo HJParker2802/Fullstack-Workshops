@@ -16,3 +16,25 @@ def create_vehicle(db: Session, vehicle_in):
     db.commit()
     db.refresh(vehicle)
     return vehicle
+
+def update_vehicle(db: Session, db_vehicle, vehicle_in):
+    update_data = vehicle_in.dict(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(db_vehicle, field, value)
+
+    db.commit()
+    db.refresh(db_vehicle)
+    return db_vehicle
+
+
+def delete_vehicle(db: Session, vin: int):
+    vehicle = db.query(VehicleModel).filter(
+        VehicleModel.VIN == vin
+    ).first()
+
+    if not vehicle:
+        return None
+
+    db.delete(vehicle)
+    db.commit()
+    return vehicle

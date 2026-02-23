@@ -1,19 +1,19 @@
-#app/schemas/officer.py
+# app/schemas/officer.py
 from pydantic import BaseModel
 from typing import Optional
 
-from app.schemas.person import PersonBase
-
 class OfficerBase(BaseModel):
     personID: int
-    ViolationsRecorded: Optional[int]
+    ViolationsRecorded: Optional[int] = 0
 
 class OfficerCreate(OfficerBase):
     pass  
 
+class OfficerUpdate(BaseModel):
+    ViolationsRecorded: Optional[int] = None
+
 class OfficerOut(OfficerBase):
     OfficerID: int
-    person: PersonBase
 
     class Config:
         orm_mode = True

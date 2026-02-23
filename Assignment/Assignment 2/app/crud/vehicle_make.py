@@ -16,3 +16,25 @@ def create_vehicle_make(db: Session, make_in):
     db.commit()
     db.refresh(make)
     return make
+
+def update_vehicle_make(db: Session, db_make, make_in):
+    update_data = make_in.dict(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(db_make, field, value)
+
+    db.commit()
+    db.refresh(db_make)
+    return db_make
+
+
+def delete_vehicle_make(db: Session, make_id: int):
+    make = db.query(VehicleMakeModel).filter(
+        VehicleMakeModel.VehicleMakeID == make_id
+    ).first()
+
+    if not make:
+        return None
+
+    db.delete(make)
+    db.commit()
+    return make

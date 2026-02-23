@@ -1,27 +1,21 @@
 #app/schemas/violation.py
 from pydantic import BaseModel
 from typing import Optional
- 
-from app.schemas.person import PersonBase
-from app.schemas.officer import OfficerBase
-from app.schemas.violation_type import ViolationTypeBase
 
 class ViolationBase(BaseModel):
+    OfficerID: int
+    ViolationTypeID: int
+    Location: str
+    District: str
     ViolationDate: str
     ViolationTime: str
-    PersonID: int          
-    OfficerID: int         
-    ViolationTypeID: int   
-    Notes: Optional[str] = None
+    ViolatorID: int
 
 class ViolationCreate(ViolationBase):
-    pass  
+    pass
 
 class ViolationOut(ViolationBase):
-    ViolationID: int
-    person: PersonBase            
-    officer: OfficerBase          
-    violation_type: ViolationTypeBase  
+    ViolationsID: int
 
     class Config:
         orm_mode = True

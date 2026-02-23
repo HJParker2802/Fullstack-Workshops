@@ -7,7 +7,5 @@ class Officer(Base):
     __tablename__ = "tbl_Officers"
 
     OfficerID = Column(Integer, primary_key=True, index=True)
-    PersonID = Column(Integer, ForeignKey("tbl_Person.PersonID"))
-    ViolationsRecorded = Column(Integer)
-
-    person = relationship("Person")
+    personID = Column(Integer, ForeignKey("tbl_Person.PersonID"), nullable=False)
+    ViolationsRecorded = Column(Integer, default=0)

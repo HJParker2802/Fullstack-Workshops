@@ -1,15 +1,14 @@
 #app/schemas/violation_type.py
 from pydantic import BaseModel
-from typing import Optional
 
 class ViolationTypeBase(BaseModel):
     ViolationName: str
     ViolationClass: str
 
 class ViolationTypeCreate(ViolationTypeBase):
-    pass  
+    pass
 
-class ViolationType(ViolationTypeBase):
+class ViolationTypeOut(ViolationTypeBase):
     ViolationTypeID: int
 
     class Config:

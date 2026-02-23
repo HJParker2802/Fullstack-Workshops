@@ -1,12 +1,7 @@
 #app/main.py
 from fastapi import FastAPI
 
-from app.api import person
-from app.api import officers
-from app.api import vehicles
-from app.api import violations
-from app.api import violation_types
-from app.api import drivers_license
+from app.api import person, drivers_license, officers, vehicles, vehicle_make, violations, violation_types
 
 app = FastAPI(
     title="Traffic Violations API",
@@ -14,9 +9,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
+@app.get("/", )
+def root_message():
+    return "Traffic Violations API\nVisit /docs to see the API documentation\n This was written by Harry Parker \n for Fullstack Development Assignment 2."
+
 app.include_router(person.router)
+app.include_router(drivers_license.router)
 app.include_router(officers.router)
 app.include_router(vehicles.router)
+app.include_router(vehicle_make.router)
 app.include_router(violations.router)
 app.include_router(violation_types.router)
-app.include_router(drivers_license.router)

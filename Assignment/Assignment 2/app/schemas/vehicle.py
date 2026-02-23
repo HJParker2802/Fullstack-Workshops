@@ -1,23 +1,20 @@
-#app/schemas/vehicle.py
+# app/schemas/vehicle.py
 from pydantic import BaseModel
 from typing import Optional
-
-from app.schemas.person import PersonBase
 
 class VehicleBase(BaseModel):
     VehicleLicense: str
     VehicleState: str
     VehicleColour: str
-    VehicleMakeID: int 
+    VehicleMakeID: int
     VehicleAddress: str
-    VehicleOwnerID: int  
+    VehicleOwner: int
 
 class VehicleCreate(VehicleBase):
-    DriversLicenseID: Optional[int]
+    pass  
 
 class VehicleOut(VehicleBase):
-    VIN: int # Vehicle ID is VIN
-    owner: PersonBase  
+    VIN: int
 
     class Config:
         orm_mode = True

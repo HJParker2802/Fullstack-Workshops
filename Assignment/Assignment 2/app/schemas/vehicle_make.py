@@ -9,10 +9,9 @@ class VehicleMakeBase(BaseModel):
     VehicleBrand: str
     CarWeight: int
     VehicleYear: int
-    Country: str
 
 class VehicleMakeCreate(VehicleMakeBase):
-    pass  # nothing extra needed for creation
+    pass  # nothing extra for creation
 
 class VehicleMake(VehicleMakeBase):
     VehicleMakeID: int
